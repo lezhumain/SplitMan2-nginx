@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ -z "${CERT_PATH}" ]; then
+  echo "Need to export CERT_{ATH"
+  exit 1
+fi
+
 function sedi()
 {
   if [ -z "$(uname -a | grep -i darwin)" ]; then
@@ -15,4 +20,13 @@ function sedi()
 cp nginx.conf nginx.conf.1
 sedi -e "s|LOCAL_IP|$1|g" nginx.conf.1
 
+cp "${CERT_PATH}.crt" ./nginx.crt
+cp "${CERT_PATH}.key" ./nginx.key
+
 docker build -t splitman2nginx .
+RES="$?"
+
+rm ./nginx.crt
+rm ./nginx.key
+
+exit "$RES"
