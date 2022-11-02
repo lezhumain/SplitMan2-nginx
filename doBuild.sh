@@ -1,7 +1,7 @@
 #! /bin/bash
 
 if [ -z "${CERT_PATH}" ]; then
-  echo "Need to export CERT_{ATH"
+  echo "Need to export CERT_PATH"
   exit 1
 fi
 
