@@ -11,10 +11,10 @@ COPY ./run.sh /app/run.sh
 RUN chmod +x /app/run.sh
 
 #RUN /usr/sbin/nginx
-#CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
 #CMD ["/usr/sbin/nginx"]
 #CMD ["tail", "-f", "/var/log/nginx/access.log"]
 
-CMD ["sh", "/app/run.sh"]
+#CMD ["sh", "/app/run.sh"]
 
 EXPOSE 443
