@@ -7,4 +7,4 @@
 
 #/usr/sbin/nginx
 #tail -f /var/log/nginx/access.log
-/usr/sbin/nginx -g deamon off;
+/usr/sbin/nginx -g "deamon off;"
