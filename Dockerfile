@@ -15,6 +15,6 @@ RUN chmod +x /app/run.sh
 #CMD ["/usr/sbin/nginx"]
 #CMD ["tail", "-f", "/var/log/nginx/access.log"]
 
-CMD ["/app/run.sh"]
+CMD ["sh", "/app/run.sh"]
 
 EXPOSE 443
