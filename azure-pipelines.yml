@@ -153,14 +153,16 @@ stages:
             displayName: 'Backup current'
 
           - script: |
-              #IMAGE="splitman2nginx"
-
               # ssh into VM
               ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
                 cd "$DEBIAN_PATH"
                 docker image import "$IMAGE.tar" "$IMAGE"
               EOF
+            env:
+              DEBIAN_PATH: $(DEBIAN_PATH)
+            displayName: 'Update containers'
 
+          - script: |
               #    run containers
               cd SplitMan2-run
               bash run_containers.sh
