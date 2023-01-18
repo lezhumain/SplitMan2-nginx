@@ -18,6 +18,10 @@ resources:
       endpoint: lezhumain
       name: lezhumain/SplitMan2-run
 
+variables:
+- name: IMAGE
+  value: splitman2nginx
+
 stages:
   - stage: Build
     jobs:
@@ -37,6 +41,12 @@ stages:
             displayName: 'Download key'
             inputs:
               secureFile: 'example.key'
+
+          - script: |
+              if [ -z "$IMAGE" ]; then
+                exit 1
+              fi
+            displayName: 'Test variables'
 
           - script: |
               cd SplitMan2-nginx
@@ -67,7 +77,7 @@ stages:
               export CERT_PATH="$HOME/.ssl/example"
               bash ../SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "SplitMan2-nginx"
 
-              IMAGE="splitman2nginx"
+              #IMAGE="splitman2nginx"
               docker image save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
 
               echo "$(Build.ArtifactStagingDirectory)"
@@ -102,7 +112,7 @@ stages:
 
           - script: |
               # upload artifact to VM
-              IMAGE="splitman2nginx"
+              #IMAGE="splitman2nginx"
               scp "$(Build.ArtifactStagingDirectory)/$IMAGE.tar" "ovhVM_rel:${DEBIAN_PATH}"
             env:
               DEBIAN_PATH: $(DEBIAN_PATH)
@@ -143,7 +153,7 @@ stages:
             displayName: 'Backup current'
 
           - script: |
-              IMAGE="splitman2nginx"
+              #IMAGE="splitman2nginx"
 
               # ssh into VM
               ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
