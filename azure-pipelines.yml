@@ -78,7 +78,8 @@ stages:
 #              bash ../SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "SplitMan2-nginx"
 #
 #              #IMAGE="splitman2nginx"
-#              docker image save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
+#              #docker image save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
+#              docker save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
 #
 #              echo "$(Build.ArtifactStagingDirectory)"
 #              echo "$(Build.ArtifactStagingDirectory)" | wc
@@ -158,8 +159,9 @@ stages:
                 cd "$DEBIAN_PATH"
                 docker ps
                 docker images
-                docker system prune -af
-                docker image import "$IMAGE.tar" "$IMAGE"
+                #docker system prune -af
+                #docker image import "$IMAGE.tar" "$IMAGE"
+                docker load -i "$IMAGE.tar"
                 docker images
                 docker ps
               EOF
