@@ -151,16 +151,16 @@ stages:
 #            env:
 #              DEBIAN_PATH: $(DEBIAN_PATH)
 #            displayName: 'Backup current'
-#
-#          - script: |
-#              # ssh into VM
-#              ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
-#                cd "$DEBIAN_PATH"
-#                docker image import "$IMAGE.tar" "$IMAGE"
-#              EOF
-#            env:
-#              DEBIAN_PATH: $(DEBIAN_PATH)
-#            displayName: 'Update containers'
+
+          - script: |
+              # ssh into VM
+              ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
+                cd "$DEBIAN_PATH"
+                docker image import "$IMAGE.tar" "$IMAGE"
+              EOF
+            env:
+              DEBIAN_PATH: $(DEBIAN_PATH)
+            displayName: 'Update containers'
 
           - script: |
               #    run containers
