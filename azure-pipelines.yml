@@ -3,10 +3,12 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-pr:
-  branches:
-    include:
-    - '*'  # must quote since "*" is a YAML reserved character; we want a string
+#pr:
+#  branches:
+#    include:
+#    - '*'  # must quote since "*" is a YAML reserved character; we want a string
+trigger:
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -147,11 +149,11 @@ stages:
               DEBIAN_IP: $(DEBIAN_IP)
             displayName: 'Setup SSH access'
 
-#          - script: |
-#              bash SplitMan2-run/backup_current.sh
-#            env:
-#              DEBIAN_PATH: $(DEBIAN_PATH)
-#            displayName: 'Backup current'
+          - script: |
+              bash SplitMan2-run/backup_current.sh
+            env:
+              DEBIAN_PATH: $(DEBIAN_PATH)
+            displayName: 'Backup current'
 
           - script: |
               # ssh into VM
