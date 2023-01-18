@@ -143,6 +143,8 @@ stages:
             displayName: 'Backup current'
 
           - script: |
+              IMAGE="splitman2nginx"
+
               # ssh into VM
               ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
                 cd "$DEBIAN_PATH"
