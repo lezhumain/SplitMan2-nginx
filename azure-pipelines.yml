@@ -23,6 +23,8 @@ resources:
 variables:
 - name: IMAGE
   value: splitman2nginx
+- name: SREPO
+  value: SplitMan2-nginx
 
 stages:
   - stage: Build
@@ -51,7 +53,7 @@ stages:
             displayName: 'Test variables'
 
           - script: |
-              cd SplitMan2-nginx
+              cd "$SREPO"
               echo "$(whoami)"
               sudo chown "$(whoami)":root $(sslCert.secureFilePath)
               sudo chmod 600 $(sslCert.secureFilePath)
@@ -74,10 +76,10 @@ stages:
             displayName: 'Prepare SSL key and cert'
 
           - script: |
-              cd SplitMan2-nginx
+              cd "$SREPO"
 
               export CERT_PATH="$HOME/.ssl/example"
-              bash ../SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "SplitMan2-nginx"
+              bash ../SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "$SREPO"
 
               #IMAGE="splitman2nginx"
               #docker image save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
