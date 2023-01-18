@@ -156,7 +156,10 @@ stages:
               # ssh into VM
               ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
                 cd "$DEBIAN_PATH"
+                docker ps
+                docker images
                 docker image import "$IMAGE.tar" "$IMAGE"
+                docker images
               EOF
             env:
               DEBIAN_PATH: $(DEBIAN_PATH)
