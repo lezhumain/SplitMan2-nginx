@@ -99,7 +99,8 @@ stages:
             displayName: 'Prepare SSH key'
 
           - script: |
-              bash SplitMan2-run/setup_azure_ssh.sh
+              cat SplitMan2-run/setup_azure_ssh.sh
+              . SplitMan2-run/setup_azure_ssh.sh
               cat "$HOME/.ssh/config"
             env:
               DEBIAN_USER: $(DEBIAN_USER)
