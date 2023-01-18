@@ -158,8 +158,10 @@ stages:
                 cd "$DEBIAN_PATH"
                 docker ps
                 docker images
+                docker system prune -af
                 docker image import "$IMAGE.tar" "$IMAGE"
                 docker images
+                docker ps
               EOF
             env:
               DEBIAN_PATH: $(DEBIAN_PATH)
