@@ -62,10 +62,10 @@ stages:
             displayName: 'Prepare SSL key and cert'
 
           - script: |
-              # cd SplitMan2-nginx
+              cd SplitMan2-nginx
 
               export CERT_PATH="$HOME/.ssl/example"
-              bash SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "SplitMan2-nginx"
+              bash ../SplitMan2-run/run_docker_e2e.sh "$DEBIAN_IP" "https" "SplitMan2-nginx"
 
               IMAGE="splitman2nginx"
               docker image save "$IMAGE" -o "$(Build.ArtifactStagingDirectory)/$IMAGE.tar"
