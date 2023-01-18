@@ -80,6 +80,35 @@ stages:
               DEBIAN_IP: $(DEBIAN_IP)
             displayName: 'Build containers'
 
+          - task: DownloadSecureFile@1
+            name: sshKey
+            displayName: 'Download SSH key'
+            inputs:
+              secureFile: 'id_releaseUser'
+
+          - script: |
+              chmod +x SplitMan2-run/*.sh
+              bash SplitMan2-run/prepare_azure_ssh.sh "$(sshKey.secureFilePath)"
+            displayName: 'Prepare SSH key'
+
+          - script: |
+              #cat SplitMan2-run/setup_azure_ssh.sh
+              . SplitMan2-run/setup_azure_ssh.sh
+              cat "$HOME/.ssh/config"
+            env:
+              DEBIAN_USER: $(DEBIAN_USER)
+              DEBIAN_IP: $(DEBIAN_IP)
+            displayName: 'Setup SSH access'
+
+          -script: |
+              # upload artifact to VM
+              IMAGE="splitman2nginx"
+              scp "$(Build.ArtifactStagingDirectory)/$IMAGE.tar" "ovhVM_rel:${DEBIAN_PATH}"
+            env:
+              DEBIAN_PATH: $(DEBIAN_PATH)
+            displayName: 'Save containers'
+
+
   - stage: Deploy
     jobs:
       - job: Deploy_Docker_Containers
@@ -114,10 +143,6 @@ stages:
             displayName: 'Backup current'
 
           - script: |
-              # upload artifact to VM
-              IMAGE="splitman2nginx"
-              scp "$(Build.ArtifactStagingDirectory)/$IMAGE.tar" "ovhVM_rel:${DEBIAN_PATH}"
-
               # ssh into VM
               ssh -oBatchMode=yes "ovhVM_rel" bash << EOF
                 cd "$DEBIAN_PATH"
