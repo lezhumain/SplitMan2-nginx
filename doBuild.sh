@@ -23,6 +23,8 @@ sedi -e "s|LOCAL_IP|$1|g" nginx.conf.1
 cp "${CERT_PATH}.crt" ./nginx.crt
 cp "${CERT_PATH}.key" ./nginx.key
 
+echo "test"
+
 docker build -t splitman2nginx .
 RES="$?"
 
