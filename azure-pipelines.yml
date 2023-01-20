@@ -8,8 +8,8 @@
 #    include:
 #    - '*'  # must quote since "*" is a YAML reserved character; we want a string
 
-#trigger:
-#- main
+pr: none
+
 trigger:
   branches:
     include:
