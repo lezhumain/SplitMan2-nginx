@@ -6,5 +6,4 @@ COPY ./nginx.main.conf /etc/nginx/nginx.conf
 COPY ./nginx.crt /etc/nginx/certificate/nginx-certificate.crt
 COPY ./nginx.key /etc/nginx/certificate/nginx.key
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
-EXPOSE 80
-
+EXPOSE 443
