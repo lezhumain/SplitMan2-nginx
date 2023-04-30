@@ -44,13 +44,13 @@ stages:
             name: sslCert
             displayName: 'Download cert'
             inputs:
-              secureFile: 'example.crt'
+              secureFile: 'letsencrypt.crt'
 
           - task: DownloadSecureFile@1
             name: sslKey
             displayName: 'Download key'
             inputs:
-              secureFile: 'example.key'
+              secureFile: 'letsencrypt.key'
 
           - script: |
               if [ -z "$IMAGE" ]; then
