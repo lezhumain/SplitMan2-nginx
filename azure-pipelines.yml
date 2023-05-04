@@ -75,5 +75,5 @@ stages:
 
           - publish: '$(Build.ArtifactStagingDirectory)/$(IMAGE).tar'
             displayName: 'Publish tar image'
-            artifact: splitman2nginx_tar
+            artifact: $(IMAGE)_tar
            
