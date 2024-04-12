@@ -8,7 +8,7 @@ fi
 function sedi()
 {
   if [ -z "$(uname -a | grep -i darwin)" ]; then
-    #linux
+    #linux -- do build tmp
     sed -i.bak "$1" "$2" "$3"
     #sed -i.bak "s|PROD_IP|$1|g" src/environments/environment.prod.ts
   else
